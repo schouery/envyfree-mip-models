@@ -137,7 +137,6 @@ void solution_print(IloCplex cplex, IloEnv env, graph g) {
   cout << "  bidders: " << g->bidders << endl;
   cout << "  items: " << g->items << endl;
   cout << "  edges: " << g->edges << endl;
-  // cplex.getCplexTime()?
   cout << "  time: " << clock_current_time() << endl;
   cout << "  status: " << cplex.getStatus() << endl;
   cout << "  value: " << cplex.getObjValue() << endl;

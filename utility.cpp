@@ -86,7 +86,6 @@ void utility_create_vars(graph g, IloModel model, IloNumVarArray x, IloNumVarArr
   for(int j = 0; j < g->items; j++) {
     s = "p_" + itos(j);
     p.add(IloNumVar(env, 0.0, boundp(j), ILOFLOAT, s.c_str()));
-    // p.add(IloNumVar(env, lowerp(j), boundp(j), ILOFLOAT, s.c_str()));
   }
   for(int i = 0; i < g->bidders; i++) {
     s = "u_" + itos(i);
@@ -158,7 +157,38 @@ IloRangeArray utility_constraints(graph g, IloModel model, IloNumVarArray x, Ilo
   return c;
 }
 
-void utility_solve(graph g, bool integer, bool use_presolve) {
+void utility_load(graph g, IloCplex cplex, IloModel model, IloNumVarArray x, IloNumVarArray p, IloNumVarArray u, int **columns, vector<int>& allocation, vector<double>& pricing) {
+  try {
+  IloNumVarArray variables(model.getEnv());
+  IloNumArray values(model.getEnv());
+  for(int j = 0; j < g->items; j++) {
+    if(boundp(j) > 0){
+      variables.add(p[j]);
+      values.add(pricing[j]);  
+    }
+  }
+  for(int i = 0; i < g->bidders; i++) {
+    for(int e = 0; e < g->dbidder[i]; e++) {
+      int j = g->b_adj[i][e];
+      variables.add(x[columns[i][j]]);
+      values.add(allocation[i] == j ? 1 : 0);
+    }
+  }
+  for(int i = 0; i < g->bidders; i++) {
+    if(boundu(i) > 0) {
+      variables.add(u[i]);
+      values.add(allocation[i] != -1 ? g->adj[i][allocation[i]] - pricing[allocation[i]] : 0);  
+    }    
+  }
+  cplex.addMIPStart(variables, values);
+  }
+  catch (IloException& e) {
+    cerr << "->" << e << endl;
+    abort();
+  }
+}
+
+void utility_solve(graph g, vector<int>& allocation, vector<double>& pricing, bool integer, bool use_presolve) {
   int **columns = (int **)malloc(g->bidders * sizeof(int *));
   for(int i = 0; i < g->bidders; i++)
     columns[i] = (int *)calloc(g->items, sizeof(int));
@@ -177,6 +207,8 @@ void utility_solve(graph g, bool integer, bool use_presolve) {
     config_cplex(cplex); 
     if(!integer) {
       model.add(IloConversion(env, x, ILOFLOAT));
+    } else {
+      utility_load(g, cplex, model, x, p, u, columns, allocation, pricing);
     }
     if(!use_presolve) {
       cplex.setParam(IloCplex::PreInd, 0);

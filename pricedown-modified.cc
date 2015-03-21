@@ -46,6 +46,7 @@
 #include <string.h>
 using namespace std;
 
+#define NEW_INPUT_FORMAT 
 #define FR(i,a,b) for(int i=(a);i<(b);++i)
 #define FOR(i,n) FR(i,0,n)
 #define RF(i,a,b) for(int i=(a)-1;i>=(b);--i)
@@ -170,6 +171,10 @@ double bnb_tol = 0.05; // percentage within optimal for branch-and-bound
 
 bool torsdk();
 
+// true if heuristics should be completely silent
+//   (used for branch-and-bound)
+bool silent=0;
+
 void parse_args(int argc, char *argv[]) {
   FR(i,1,argc) {
     char *arg = argv[i];
@@ -205,7 +210,7 @@ void parse_args(int argc, char *argv[]) {
     if (0==strcmp(arg,"--trace")) do_trace = 1;
     if (0==strcmp(arg,"--paranoid")) paranoid = 1;
     if (0==strcmp(arg,"--verbose")) verbose = 1;
-
+    if (0==strcmp(arg,"--silent")) silent = 1;
     if (0==strcmp(arg,"--help")) {
       printf("Usage: %s [options]\n"
 	     "\n"
@@ -242,9 +247,7 @@ void parse_args(int argc, char *argv[]) {
   }
 }
 
-// true if heuristics should be completely silent
-//   (used for branch-and-bound)
-bool silent=0;
+
 
 // get consumer i's surplus if assigned to product j
 inline double getsurp(int i, int j) {
@@ -692,7 +695,7 @@ bool update_from_choices() {
 
   int i = besti;
   int c = bestc;
-  printf("  changed price of consumer %d's top %d choices by %lf\n",
+  if (!silent) printf("  changed price of consumer %d's top %d choices by %lf\n",
     i, c+1, bestdp);
 
   FOR(d,c+1) {
@@ -702,7 +705,7 @@ bool update_from_choices() {
   // fix assignment
   recompute_asst();
 
-  printf("    (giving obj = %lf; expected = %lf)\n", getobj(), bestobj);
+  if (!silent) printf("    (giving obj = %lf; expected = %lf)\n", getobj(), bestobj);
   verify();
   assert(fabs(bestobj-getobj()) < eps);
 
@@ -744,11 +747,11 @@ bool update_subtrees() {
   if (best_obj > old_obj) {
     pi = best_pi;
     asst = best_asst;
-    printf("  changed price of subtree rooted at %d\n", best_j);
-    printf("    (giving obj = %lf)\n", getobj());
+    if (!silent) printf("  changed price of subtree rooted at %d\n", best_j);
+    if (!silent) printf("    (giving obj = %lf)\n", getobj());
     return 1;
   } else {
-    printf("ust failed\n");
+    if (!silent) printf("ust failed\n");
     return 0;
   }
 }
@@ -1369,7 +1372,7 @@ bool crazy() {
   }
 
   long long after = get_cpu_usecs();
-  printf("spent %lli usecs in crazy()\n", after-before);
+  if (!silent) printf("spent %lli usecs in crazy()\n", after-before);
 
   return false;
 }
@@ -1387,7 +1390,7 @@ void do_heuristic_init() {
     // if using maxr heuristic, initially assign each
     // consumer to the product which he/she likes the most,
     // then compute prices
-    printf("initializing with MAXR heuristic\n");
+    if (!silent) printf("initializing with MAXR heuristic\n");
 
     pi = vector<double>(m, 0);
     FOR(i,n) {
@@ -1404,7 +1407,7 @@ void do_heuristic_init() {
     // this modified version of Guruswami et al. log-approx algo
     // sets all prices to the same value, which is given by each
     // consumer's maximum reservation price
-    printf("initializing with Guruswami et al.\n");
+    if (!silent) printf("initializing with Guruswami et al.\n");
 
     double bestp = 0, bestobj = 0;
 
@@ -1435,7 +1438,7 @@ void do_heuristic_init() {
 
     // while this is true, this may cause us to miss good moves
     // so now we check the lower bounds
-    printf("initializing with Levent's enhanced Guruswami et al.\n");
+    if (!silent) printf("initializing with Levent's enhanced Guruswami et al.\n");
 
     vector<int> prod;
     FR(j,1,m) prod.PB(j);
@@ -1484,7 +1487,7 @@ void do_heuristic_init() {
       FOR(i,n) bought.insert(asst[i]);
       FR(j,1,m) if (!bought.count(j)) prod.PB(j);
 
-      printf("  MOVE TO OBJECTIVE %lf (nprod = %d)\n", getobj(), (int)prod.size());
+      if (!silent) printf("  MOVE TO OBJECTIVE %lf (nprod = %d)\n", getobj(), (int)prod.size());
     }
   }
 
@@ -1554,13 +1557,15 @@ void do_good_heuristics(int *count=0) {
 void dumpsoln() {
   FOR(i,n) {
     int j = asst[i];
-    printf("  Consumer %d buys %d for %lf (R = %lf)\n", i, j, pi[j], R[i][j]);
+    // printf("  Consumer %d buys %d for %lf (R = %lf)\n", i, j, pi[j], R[i][j]);
+    printf("%d %d %lf\n", i, j-1, pi[j]);
   }
 }
 
 void dumppi() {
   FOR(j,m) {
-    printf("  Product %d costs %lf\n", j, pi[j]);
+    // printf("  Product %d costs %lf\n", j, pi[j]);
+    printf("%d %lf\n", j, pi[j]);
   }
 }
 
@@ -1573,6 +1578,7 @@ void dumpdir() {
 long long begin_time;
 
 void last_words() {
+  if (!silent) {
   long long fin_time = get_cpu_usecs();
   printf("\n");
   printf("Products sold: %d / %d\n", getnsold()-1, m-1);
@@ -1581,6 +1587,7 @@ void last_words() {
   assert(fabs(gettotsurp() + getobj() - getwelfare()) < eps);
   printf("Final objective value: %lf\n", getobj());
   printf("cpu usecs: %lli\n", fin_time - begin_time);
+  }
 }
 
 void sigdie(int sig) {
@@ -1605,34 +1612,59 @@ int main(int argc, char *argv[]) {
     R = matrix<double>(n, m+1);
     adj = matrix<double>(m+1, m+1);
   
-    FOR(i,n) {
-      FOR(j,m) {
-        scanf("%lf",&R[i][j+1]);
+    #ifdef NEW_INPUT_FORMAT
+      int edges;
+      scanf("%d",&edges);
+      FOR(i,n) {
+        FOR(j,m) {
+          R[i][j+1] = 0;
+        }
       }
-    }
-  
-    // product 0 is the null product
-    ++m;
-    FOR(i,n) R[i][0] = 0;
-  
-    FOR(i,n) {
-      double cs;
-      scanf("%lf",&cs);
-  
-      FOR(j,m) {
-        R[i][j] = max(0.0, R[i][j] - cs);
+      FOR(i,edges){
+        int bidder, item;
+        double value;
+        scanf("%d%d%lf",&bidder, &item, &value);
+        R[bidder][item+1] = value;
       }
-    }
-  
-    FOR(i,n) {
-      scanf("%lf",&N[i]);
-    }
-  
-    scanf("%lf",&delta); // ignore delta for now
-    if (fabs(delta) > eps) {
-      printf("WARNING: delta /= 0 and is ignored\n");
-    }
-  
+    
+      // product 0 is the null product
+      ++m;
+      FOR(i,n) R[i][0] = 0;
+
+      FOR(i,n) {
+        N[i] = 1;
+      }
+      delta = 0;
+    #else
+      FOR(i,n) {
+        FOR(j,m) {
+          scanf("%lf",&R[i][j+1]);
+        }
+      }
+    
+      // product 0 is the null product
+      ++m;
+      FOR(i,n) R[i][0] = 0;
+    
+      FOR(i,n) {
+        double cs;
+        scanf("%lf",&cs);
+    
+        FOR(j,m) {
+          R[i][j] = max(0.0, R[i][j] - cs);
+        }
+      }
+    
+      FOR(i,n) {
+        scanf("%lf",&N[i]);
+      }
+    
+      scanf("%lf",&delta); // ignore delta for now
+      if (fabs(delta) > eps) {
+        printf("WARNING: delta /= 0 and is ignored\n");
+      }
+    #endif
+
     begin_time = get_cpu_usecs();
     int count = 0;
 
@@ -2056,11 +2088,11 @@ bool torsdk() {
       asdf::dobson_getbestmove(asst, foo.parents, oldprofit, nuprofit);
   pi = foo.prices;
   if (bestmove == -1) {
-    printf("Failed to do a DK move.\n");
+    if(!silent) printf("Failed to do a DK move.\n");
     return false;
   }
 
-  printf("  Bumped %i from %i to %i changing profit from %f to %f\n",
+  if(!silent) printf("  Bumped %i from %i to %i changing profit from %f to %f\n",
           bestmove, asst[bestmove], foo.parents[asst[bestmove]],
           oldprofit, nuprofit);
   asst[bestmove] = foo.parents[asst[bestmove]];

@@ -1,6 +1,7 @@
 #include <unistd.h>
 #include <iostream>
 #include <fstream>
+#include <vector>
 #include "utility.h"
 #include "profit.h"
 #include "utils.h"
@@ -10,6 +11,7 @@
 #define UTILITY_FORMULATION 3
 #define HLMS 4
 #define LOOSE_FORMULATION 5
+#define MST_FORMULATION 6
 
 using namespace std;
 char *main_filename = NULL;
@@ -35,12 +37,13 @@ graph read(char *filename) {
 }
 
 void usage(char *argv) {
-  cout << argv << " [-U|-S|-H|-P|-L] [-t time] [-n nodes] [-v level] [-h] [-e epsilon] filename" << endl;
+  cout << argv << " [-U|-S|-H|-P|-L|-M] [-t time] [-n nodes] [-v level] [-h] [-e epsilon] filename" << endl;
   cout << "-U: " << "Utility Formulation" << endl;
   cout << "-S: " << "STM Formulation" << endl;
   cout << "-H: " << "HLMS Formulation" << endl;
   cout << "-L: " << "Loose Formulation" << endl;
   cout << "-P: " << "Profit Formulation" << endl;
+  cout << "-M: " << "MST Formulation" << endl;
   cout << "-t time: " << "Set time as a time limit" << endl;
   cout << "-n nodes: " << "Set nodes as a node limit" << endl;
   cout << "-v level: " << "Set the verbosity level" << endl;
@@ -52,7 +55,7 @@ void usage(char *argv) {
 int setup(int argc, char **argv) {
   int c, formulation = DEFAULT_FORMULATION; 
   opterr = 0; 
-  while ((c = getopt (argc, argv, "USHPLt:n:v:h")) != -1) {
+  while ((c = getopt (argc, argv, "USHPLMt:n:v:h")) != -1) {
     switch (c) {
       case 'U':
         formulation = UTILITY_FORMULATION;
@@ -68,6 +71,9 @@ int setup(int argc, char **argv) {
         break;
       case 'L':
         formulation = LOOSE_FORMULATION;
+        break;
+      case 'M':
+        formulation = MST_FORMULATION;
         break;
       case 't':
         setTimeLimit(atoi(optarg));
@@ -99,43 +105,68 @@ int setup(int argc, char **argv) {
   return formulation;
 }
 
+void read_heuristic(char *main_filename, graph g, vector<int>& allocation, vector<double>& pricing) {
+  string heuristic_file(main_filename);
+  heuristic_file.append("-heuristic");
+  ifstream file(heuristic_file.c_str(), ios::in);
+  for (int i = 0; i < g->items; ++i)
+    pricing.push_back(boundp(i));
+  for (int i = 0; i < g->bidders; ++i)
+    allocation.push_back(-1);
+  for (int i = 0; file && i < g->bidders; ++i) {
+    int bidder, item;
+    double value;
+    file >> bidder >> item >> value;
+    allocation[bidder] = item;
+    if(item >= 0)
+      pricing[item] = value;
+  }
+  file.close();
+}
+
 int main(int argc, char **argv) {
-	int option = setup(argc, argv);
-	define_log(argc, argv);
-	graph g;
-	if(option >= 0) {
-		g = read(main_filename);
-		init_bounds(g, epsilon);
-	}
-	switch(option) {
-		case UTILITY_FORMULATION:
-			 utility_solve(g);
-      utility_solve(g, false);
-      utility_solve(g, false, false);
-			break;
+  int option = setup(argc, argv);
+  define_log(argc, argv);
+  graph g;
+  vector<int> allocation;
+  vector<double> pricing;
+  if(option >= 0) {
+    g = read(main_filename);
+    init_bounds(g, epsilon);
+    read_heuristic(main_filename, g, allocation, pricing);
+  }
+  switch(option) {
+    case UTILITY_FORMULATION:
+      utility_solve(g, allocation, pricing);
+      // utility_solve(g, allocation, pricing, false);
+      // utility_solve(g, allocation, pricing, false, false);
+      break;
     case PROFIT_FORMULATION:
-      profit_solve(g);
-      profit_solve(g, false);
-      profit_solve(g, false, false);
+      profit_solve(g, allocation, pricing);
+      // profit_solve(g, allocation, pricing, false);
+      // profit_solve(g, allocation, pricing, false, false);
       break;
     case STM_FORMULATION:
-      stm_solve(g);
-      stm_solve(g, false);
-      stm_solve(g, false, false);
+      stm_solve(g, allocation, pricing);
+      // stm_solve(g, allocation, pricing, false);
+      // stm_solve(g, allocation, pricing, false, false);
       break;
     case HLMS:
-      stm_solve(g, true, true, true);
-      stm_solve(g, false, true, true);
-      stm_solve(g, false, false, true);
+      stm_solve(g, allocation, pricing, true, true, true);
+      // stm_solve(g, allocation, pricing, false, true, true);
+      // stm_solve(g, allocation, pricing, false, false, true);
       break;
     case LOOSE_FORMULATION:
-      stm_solve(g, true, true, true, false);
-      stm_solve(g, false, true, true, false);
-      stm_solve(g, false, false, true, false);
+      stm_solve(g, allocation, pricing, true, true, true, false);
+      // stm_solve(g, allocation, pricing, false, true, true, false);
+      // stm_solve(g, allocation, pricing, false, false, true, false);
       break;
-		default:
-		usage(argv[0]);
-	}
-	save_log();
-	return 0;
+    case MST_FORMULATION:
+      stm_solve(g, allocation, pricing, true, true, false, false, true);
+      break;
+    default:
+    usage(argv[0]);
+  }
+  save_log();
+  return 0;
 }

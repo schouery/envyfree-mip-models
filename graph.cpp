@@ -47,7 +47,8 @@ void graph_print(graph g)
     cout << i << ": ";
     for(int j = 0; j < g->items; j++)
     {
-      cout << j << "(" << g->adj[i][j] << ") ";
+      if(g->adj[i][j])
+        cout << j << "(" << g->adj[i][j] << ") ";
     }
     cout << endl;
   }

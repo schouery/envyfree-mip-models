@@ -46,7 +46,7 @@ profit.o: profit.cpp profit.h
 stm.o: stm.cpp
 	$(CCC) -c $(CCFLAGS) stm.cpp -o stm.o
 
-pricedown-modified:
+pricedown-modified: pricedown-modified.cc
 	g++ -std=gnu++0x pricedown-modified.cc -o pricedown-modified
 
 
