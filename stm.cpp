@@ -290,18 +290,17 @@ void stm_family_solve(graph g, vector<int>& allocation, vector<double>& pricing,
       failed_print(g);
     } else if(integer) {        
         if(improve_heuristic) {
-          IloNumArray pricing(env);
-          cplex.getValues(pricing, pi);
-          IloNumArray allocation(env);
-          cplex.getValues(allocation, theta);
           ofstream file(heuristic_file.c_str(), ios::out);
           for(int i = 0; i < g->bidders; i++) {
+            bool found = false;
             for(int e = 0; e < g->dbidder[i]; e++) {
               int j = g->b_adj[i][e];
-              if(allocation[columns[i][j]] > 0) {
-                file << i << " " << j << " " << pricing[j] << endl;
+              if(cplex.getValue(theta[columns[i][j]]) > 0) {
+                file << i << " " << j << " " << cplex.getValue(pi[j]) << endl;
+                found = true;
               }
             }
+            if(!found) file << i << " -1 0.0" << endl;
           }
           file.close();
         } else {
