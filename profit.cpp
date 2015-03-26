@@ -96,7 +96,7 @@ void profit_load(graph g, IloCplex cplex, IloModel model, IloNumVarArray x, IloN
   cplex.addMIPStart(startVar, startVal);
 }
 
-void profit_solve(graph g, vector<int>& allocation, vector<double>& pricing, bool integer, bool use_presolve) {
+void profit_solve(graph g, vector<int>& allocation, vector<double>& pricing, bool integer) {
   int **columns = (int **)malloc(g->bidders * sizeof(int *));
   for(int i = 0; i < g->bidders; i++)
     columns[i] = (int *)calloc(g->items, sizeof(int));
@@ -118,9 +118,6 @@ void profit_solve(graph g, vector<int>& allocation, vector<double>& pricing, boo
     } else {
       profit_load(g, cplex, model, x, p, z, columns, allocation, pricing);
     }
-    if(!use_presolve) {
-      cplex.setParam(IloCplex::PreInd, 0);
-    }
     clock_start();
     if (!cplex.solve()) {
       failed_print(g);
@@ -128,7 +125,7 @@ void profit_solve(graph g, vector<int>& allocation, vector<double>& pricing, boo
       if(integer)
         solution_print(cplex, env, g);  
       else
-        relax_print(cplex, env, use_presolve);
+        relax_print(cplex, env);
     }
   }
   catch (IloException& e) {

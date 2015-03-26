@@ -3,6 +3,7 @@
 #include <ilcplex/ilocplex.h>
 #include <algorithm>
 #include <vector>
+#include <iomanip>
 ILOSTLBEGIN
 
 void assignment_vars(graph g, IloModel model, IloNumVarArray x, int **columns) {
@@ -188,7 +189,7 @@ void utility_load(graph g, IloCplex cplex, IloModel model, IloNumVarArray x, Ilo
   }
 }
 
-void utility_solve(graph g, vector<int>& allocation, vector<double>& pricing, bool integer, bool use_presolve) {
+void utility_solve(graph g, vector<int>& allocation, vector<double>& pricing, bool integer) {
   int **columns = (int **)malloc(g->bidders * sizeof(int *));
   for(int i = 0; i < g->bidders; i++)
     columns[i] = (int *)calloc(g->items, sizeof(int));
@@ -210,9 +211,6 @@ void utility_solve(graph g, vector<int>& allocation, vector<double>& pricing, bo
     } else {
       utility_load(g, cplex, model, x, p, u, columns, allocation, pricing);
     }
-    if(!use_presolve) {
-      cplex.setParam(IloCplex::PreInd, 0);
-    }
     clock_start();
     if (!cplex.solve()) {
       failed_print(g);
@@ -220,7 +218,7 @@ void utility_solve(graph g, vector<int>& allocation, vector<double>& pricing, bo
       if(integer)
         solution_print(cplex, env, g);  
       else
-        relax_print(cplex, env, use_presolve);
+        relax_print(cplex, env);
     }
   }
   catch (IloException& e) {

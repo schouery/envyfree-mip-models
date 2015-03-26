@@ -6,7 +6,7 @@
 #include <vector>
 using namespace std;
 
-void utility_solve(graph g, vector<int>& allocation, vector<double>& pricing, bool integer = true, bool use_presolve = true);
+void utility_solve(graph g, vector<int>& allocation, vector<double>& pricing, bool integer = true);
 void assignment_vars(graph g, IloModel model, IloNumVarArray x, int **columns);
 IloRangeArray assignment_ineq(graph g, IloModel model, IloNumVarArray x, int **columns);
 

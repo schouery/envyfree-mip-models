@@ -9,9 +9,10 @@
 #define PROFIT_FORMULATION 1
 #define STM_FORMULATION 2
 #define UTILITY_FORMULATION 3
-#define HLMS 4
+#define HLMS_FORMULATION 4
 #define LOOSE_FORMULATION 5
 #define MST_FORMULATION 6
+#define IMPROVE_HEURISTIC 7
 
 using namespace std;
 char *main_filename = NULL;
@@ -37,13 +38,14 @@ graph read(char *filename) {
 }
 
 void usage(char *argv) {
-  cout << argv << " [-U|-S|-H|-P|-L|-M] [-t time] [-n nodes] [-v level] [-h] [-e epsilon] filename" << endl;
+  cout << argv << " [-U|-S|-H|-P|-L|-M|-I] [-t time] [-n nodes] [-v level] [-h] [-e epsilon] filename" << endl;
   cout << "-U: " << "Utility Formulation" << endl;
   cout << "-S: " << "STM Formulation" << endl;
   cout << "-H: " << "HLMS Formulation" << endl;
   cout << "-L: " << "Loose Formulation" << endl;
   cout << "-P: " << "Profit Formulation" << endl;
   cout << "-M: " << "MST Formulation" << endl;
+  cout << "-I: " << "Improves current heuristic" << endl;
   cout << "-t time: " << "Set time as a time limit" << endl;
   cout << "-n nodes: " << "Set nodes as a node limit" << endl;
   cout << "-v level: " << "Set the verbosity level" << endl;
@@ -55,7 +57,7 @@ void usage(char *argv) {
 int setup(int argc, char **argv) {
   int c, formulation = DEFAULT_FORMULATION; 
   opterr = 0; 
-  while ((c = getopt (argc, argv, "USHPLMt:n:v:h")) != -1) {
+  while ((c = getopt (argc, argv, "USHPLMIt:n:v:h")) != -1) {
     switch (c) {
       case 'U':
         formulation = UTILITY_FORMULATION;
@@ -67,13 +69,16 @@ int setup(int argc, char **argv) {
         formulation = STM_FORMULATION;
         break;
       case 'H':
-        formulation = HLMS;
+        formulation = HLMS_FORMULATION;
         break;
       case 'L':
         formulation = LOOSE_FORMULATION;
         break;
       case 'M':
         formulation = MST_FORMULATION;
+        break;
+      case 'I':
+        formulation = IMPROVE_HEURISTIC;
         break;
       case 't':
         setTimeLimit(atoi(optarg));
@@ -105,9 +110,7 @@ int setup(int argc, char **argv) {
   return formulation;
 }
 
-void read_heuristic(char *main_filename, graph g, vector<int>& allocation, vector<double>& pricing) {
-  string heuristic_file(main_filename);
-  heuristic_file.append("-heuristic");
+void read_heuristic(string heuristic_file, graph g, vector<int>& allocation, vector<double>& pricing) {
   ifstream file(heuristic_file.c_str(), ios::in);
   for (int i = 0; i < g->items; ++i)
     pricing.push_back(boundp(i));
@@ -130,10 +133,12 @@ int main(int argc, char **argv) {
   graph g;
   vector<int> allocation;
   vector<double> pricing;
+  string heuristic_file(main_filename);
+  heuristic_file.append("-heuristic");
   if(option >= 0) {
     g = read(main_filename);
     init_bounds(g, epsilon);
-    read_heuristic(main_filename, g, allocation, pricing);
+    read_heuristic(heuristic_file, g, allocation, pricing);
   }
   switch(option) {
     case UTILITY_FORMULATION:
@@ -151,18 +156,21 @@ int main(int argc, char **argv) {
       // stm_solve(g, allocation, pricing, false);
       // stm_solve(g, allocation, pricing, false, false);
       break;
-    case HLMS:
-      stm_solve(g, allocation, pricing, true, true, true);
+    case HLMS_FORMULATION:
+      hlms_solve(g, allocation, pricing);
       // stm_solve(g, allocation, pricing, false, true, true);
       // stm_solve(g, allocation, pricing, false, false, true);
       break;
     case LOOSE_FORMULATION:
-      stm_solve(g, allocation, pricing, true, true, true, false);
+      loose_solve(g, allocation, pricing);
       // stm_solve(g, allocation, pricing, false, true, true, false);
       // stm_solve(g, allocation, pricing, false, false, true, false);
       break;
     case MST_FORMULATION:
-      stm_solve(g, allocation, pricing, true, true, false, false, true);
+      mst_solve(g, allocation, pricing);
+      break;
+    case IMPROVE_HEURISTIC:
+      hlms_solve(g, allocation, pricing, true, true, heuristic_file);
       break;
     default:
     usage(argv[0]);

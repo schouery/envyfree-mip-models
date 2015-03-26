@@ -1,6 +1,7 @@
 #include "utils.h"
 #include <ilcplex/ilocplex.h>
 #include <vector>
+#include <fstream>
 ILOSTLBEGIN
 
 using namespace std;
@@ -184,9 +185,9 @@ IloRangeArray mst_c2(graph g, IloModel model, IloNumVarArray theta, IloNumVarArr
   return c;
 }
 
-IloRangeArray stm_constraints(graph g, IloModel model, IloNumVarArray theta, IloNumVarArray p, IloNumVarArray pi, int M, int **columns, bool stronger=false, bool restrict_prices = true) {
+IloRangeArray stm_constraints(graph g, IloModel model, IloNumVarArray theta, IloNumVarArray p, IloNumVarArray pi, int M, int **columns, bool hlms=false, bool restrict_prices = true) {
   IloRangeArray c(model.getEnv());
-  if(stronger)
+  if(hlms)
     c.add(hlms_c1(g,model,theta,p,pi,M,columns));
   else
     c.add(stm_c1(g,model,theta,p,pi,M,columns));
@@ -237,7 +238,7 @@ void stm_load(graph g, IloCplex cplex, IloModel model, IloNumVarArray theta, Ilo
   cplex.addMIPStart(startVar, startVal);
 }
 
-void stm_solve(graph g, vector<int>& allocation, vector<double>& pricing, bool integer, bool use_presolve, bool stronger, bool restrict_prices, bool mst) {
+void stm_family_solve(graph g, vector<int>& allocation, vector<double>& pricing, bool integer, bool mst, bool hlms, bool loose, bool improve_heuristic = false, string heuristic_file = "") {
   int ** columns = (int **)malloc(g->bidders * sizeof(int *));
   for(int i = 0; i < g->bidders; i++)
     columns[i] = (int *)calloc(g->items, sizeof(int));
@@ -265,7 +266,7 @@ void stm_solve(graph g, vector<int>& allocation, vector<double>& pricing, bool i
       mst_create_vars(g, model, v, columns_for_v);  
       model.add(mst_constraints(g, model, theta, p, pi, v, M, columns, columns_for_v));
     } else {
-      model.add(stm_constraints(g, model, theta, p, pi, M, columns, stronger, restrict_prices));  
+      model.add(stm_constraints(g, model, theta, p, pi, M, columns, hlms, loose));  
     }
     //  {
     config_cplex(cplex);
@@ -275,18 +276,29 @@ void stm_solve(graph g, vector<int>& allocation, vector<double>& pricing, bool i
     } else {
       stm_load(g, cplex, model, theta, p, pi, columns, allocation, pricing);
     }
-    if(!use_presolve) {
-      cplex.setParam(IloCplex::PreInd, 0);
-    }
     clock_start();
     if (!cplex.solve()) {
       failed_print(g);
-    } else {
-      if(integer)
+    } else if(integer) {
         solution_print(cplex, env, g);  
-      else
-        relax_print(cplex, env, use_presolve);
-    }
+        if(improve_heuristic) {
+          IloNumArray pricing(env);
+          cplex.getValues(pricing, pi);
+          IloNumArray allocation(env);
+          cplex.getValues(allocation, theta);
+          ofstream file(heuristic_file.c_str(), ios::out);
+          for(int i = 0; i < g->bidders; i++) {
+            for(int e = 0; e < g->dbidder[i]; e++) {
+              int j = g->b_adj[i][e];
+              if(allocation[columns[i][j]] > 0) {
+                file << i << " " << j << " " << pricing[j] << endl;
+              }
+            }
+          }
+          file.close();
+        }
+    } else
+      relax_print(cplex, env);
   }
   catch (IloException& e) {
     cerr << "Concert exception caught: " << e << endl;
@@ -294,4 +306,18 @@ void stm_solve(graph g, vector<int>& allocation, vector<double>& pricing, bool i
   catch (...) {
     cerr << "Unknown exception caught" << endl;
   }
+}
+
+void hlms_solve(graph g, vector<int>& allocation, vector<double>& pricing, bool integer, bool improve_heuristic, string heuristic_file) {
+  stm_family_solve(g, allocation, pricing, integer, false, true, false, improve_heuristic, heuristic_file);
+}
+void mst_solve(graph g, vector<int>& allocation, vector<double>& pricing, bool integer) {
+  stm_family_solve(g, allocation, pricing, integer, true, false, false); 
+}
+void loose_solve(graph g, vector<int>& allocation, vector<double>& pricing, bool integer) {
+  stm_family_solve(g, allocation, pricing, integer, false, false, true); 
+}
+
+void stm_solve(graph g, vector<int>& allocation, vector<double>& pricing, bool integer) {
+  stm_family_solve(g, allocation, pricing, integer, false, false, false); 
 }

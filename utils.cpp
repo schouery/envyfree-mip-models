@@ -150,14 +150,9 @@ void solution_print(IloCplex cplex, IloEnv env, graph g) {
   cout << "  rows: " << cplex.getNrows() << endl;
 }
 
-void relax_print(IloCplex cplex, IloEnv env, bool use_presolve) {
-  if(use_presolve) {
-    cout << "  relax_p_time: "  << clock_current_time() << endl;
-    cout << "  relax_p_value: " << cplex.getObjValue() << endl;
-  } else {
-    cout << "  relax_time: "  << clock_current_time() << endl;
-    cout << "  relax_value: " << cplex.getObjValue() << endl;
-  }
+void relax_print(IloCplex cplex, IloEnv env) {
+  cout << "  relax_time: "  << clock_current_time() << endl;
+  cout << "  relax_value: " << cplex.getObjValue() << endl;
 }
 
 void define_log(int argc, char **argv) {
