@@ -269,8 +269,17 @@ void stm_family_solve(graph g, vector<int>& allocation, vector<double>& pricing,
       model.add(stm_constraints(g, model, theta, p, pi, M, columns, hlms, loose));  
     }
     //  {
+    if (improve_heuristic) {
+      config_cplex(cplex, false);
+      ifstream file("cplex-params", ios::in);
+      if(file) {
+        file.close();
+        cplex.readParam("cplex-params");
+      }
+    }
+
     config_cplex(cplex);
-    // cplex.exportModel("model.lp");
+    cplex.exportModel("model.lp");
     if(!integer) {
       model.add(IloConversion(env, theta, ILOFLOAT));
     } else {

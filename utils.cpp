@@ -36,12 +36,11 @@ int bigM(graph g) {
   return max + 1;
 }
 
-void config_cplex(IloCplex cplex) {
+void config_cplex(IloCplex cplex, bool log) {
   if(util_verbosity == MinimalOutput || util_verbosity == UserOutput) {
     output.open(log_filename.c_str());
     cplex.setOut(output);
   } 
-  cplex.setParam(IloCplex::ClockType, 1); //CPU time
   cplex.setParam(IloCplex::WorkMem, WORKMEM);
   cplex.setParam(IloCplex::Threads, THREADS);
   if(util_timelimit > 0)

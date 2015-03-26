@@ -26,7 +26,7 @@ int bigM(graph g);
 #include <ilcplex/ilocplex.h>
 ILOSTLBEGIN
 
-void config_cplex(IloCplex cple);
+void config_cplex(IloCplex cplex, bool log=true);
 void setTimeLimit(int timelimit);
 void setNodeLimit(int nodelimit);
 void setVerbosity(Verbose verbosity);
