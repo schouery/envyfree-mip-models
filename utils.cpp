@@ -37,7 +37,7 @@ int bigM(graph g) {
 }
 
 void config_cplex(IloCplex cplex, bool log) {
-  if(util_verbosity == MinimalOutput || util_verbosity == UserOutput) {
+  if(log && (util_verbosity == MinimalOutput || util_verbosity == UserOutput)) {
     output.open(log_filename.c_str());
     cplex.setOut(output);
   } 

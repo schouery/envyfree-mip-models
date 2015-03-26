@@ -276,10 +276,10 @@ void stm_family_solve(graph g, vector<int>& allocation, vector<double>& pricing,
         file.close();
         cplex.readParam("cplex-params");
       }
+    } else {
+      config_cplex(cplex);  
     }
-
-    config_cplex(cplex);
-    cplex.exportModel("model.lp");
+    // cplex.exportModel("model.lp");
     if(!integer) {
       model.add(IloConversion(env, theta, ILOFLOAT));
     } else {
@@ -288,8 +288,7 @@ void stm_family_solve(graph g, vector<int>& allocation, vector<double>& pricing,
     clock_start();
     if (!cplex.solve()) {
       failed_print(g);
-    } else if(integer) {
-        solution_print(cplex, env, g);  
+    } else if(integer) {        
         if(improve_heuristic) {
           IloNumArray pricing(env);
           cplex.getValues(pricing, pi);
@@ -305,6 +304,8 @@ void stm_family_solve(graph g, vector<int>& allocation, vector<double>& pricing,
             }
           }
           file.close();
+        } else {
+          solution_print(cplex, env, g);  
         }
     } else
       relax_print(cplex, env);
