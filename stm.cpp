@@ -210,7 +210,7 @@ IloRangeArray mst_constraints(graph g, IloModel model, IloNumVarArray theta, Ilo
   return c;
 }
 
-void stm_load(graph g, IloCplex cplex, IloModel model, IloNumVarArray theta, IloNumVarArray p, IloNumVarArray pi, int **columns, vector<int>& allocation, vector<double>& pricing) {
+double stm_load(graph g, IloCplex cplex, IloModel model, IloNumVarArray theta, IloNumVarArray p, IloNumVarArray pi, int **columns, vector<int>& allocation, vector<double>& pricing) {
   IloNumVarArray startVar(model.getEnv());
   IloNumArray startVal(model.getEnv());
   for(int j = 0; j < g->items; j++) {
@@ -226,17 +226,41 @@ void stm_load(graph g, IloCplex cplex, IloModel model, IloNumVarArray theta, Ilo
       startVal.add(allocation[i] == j ? 1 : 0);
     }
   }
+  double sum = 0;
   for(int i = 0; i < g->bidders; i++) {
     for(int e = 0; e < g->dbidder[i]; e++) {
       int j = g->b_adj[i][e];
-      if(g->adj[i][j] > 0){
+      if(g->adj[i][j] > 0) {
         startVar.add(p[columns[i][j]]);
-        startVal.add(allocation[i] != -1 ? pricing[allocation[i]] : 0);
+        if (allocation[i] == j) {
+          startVal.add(pricing[allocation[i]]);
+          sum += pricing[allocation[i]];
+        }
+        else
+          startVal.add(0);
       }
     }
   }
   cplex.addMIPStart(startVar, startVal);
+  return sum;
 }
+
+void save_solution(string heuristic_file, graph g, IloCplex cplex, IloNumVarArray theta, IloNumVarArray pi, int **columns) {
+  ofstream file(heuristic_file.c_str(), ios::out);
+  for(int i = 0; i < g->bidders; i++) {
+    bool found = false;
+    for(int e = 0; e < g->dbidder[i]; e++) {
+      int j = g->b_adj[i][e];
+      if(cplex.getValue(theta[columns[i][j]]) > 0) {
+        file << i << " " << j << " " << cplex.getValue(pi[j]) << endl;
+        found = true;
+      }
+    }
+    if(!found) file << i << " -1 0.0" << endl;
+  }
+  file.close();
+}
+
 
 void stm_family_solve(graph g, vector<int>& allocation, vector<double>& pricing, bool integer, bool mst, bool hlms, bool loose, bool improve_heuristic = false, string heuristic_file = "") {
   int ** columns = (int **)malloc(g->bidders * sizeof(int *));
@@ -268,44 +292,26 @@ void stm_family_solve(graph g, vector<int>& allocation, vector<double>& pricing,
     } else {
       model.add(stm_constraints(g, model, theta, p, pi, M, columns, hlms, loose));  
     }
-    //  {
-    if (improve_heuristic) {
-      config_cplex(cplex, false);
-      ifstream file("cplex-params", ios::in);
-      if(file) {
-        file.close();
-        cplex.readParam("cplex-params");
-      }
-    } else {
-      config_cplex(cplex);  
-    }
+    config_cplex(cplex, !improve_heuristic);
+    double heuristic_solution = 0;
     // cplex.exportModel("model.lp");
     if(!integer) {
       model.add(IloConversion(env, theta, ILOFLOAT));
     } else {
-      stm_load(g, cplex, model, theta, p, pi, columns, allocation, pricing);
+      heuristic_solution = stm_load(g, cplex, model, theta, p, pi, columns, allocation, pricing);
     }
     clock_start();
     if (!cplex.solve()) {
       failed_print(g);
     } else if(integer) {        
-        if(improve_heuristic) {
-          ofstream file(heuristic_file.c_str(), ios::out);
-          for(int i = 0; i < g->bidders; i++) {
-            bool found = false;
-            for(int e = 0; e < g->dbidder[i]; e++) {
-              int j = g->b_adj[i][e];
-              if(cplex.getValue(theta[columns[i][j]]) > 0) {
-                file << i << " " << j << " " << cplex.getValue(pi[j]) << endl;
-                found = true;
-              }
-            }
-            if(!found) file << i << " -1 0.0" << endl;
-          }
-          file.close();
-        } else {
+      if(improve_heuristic) {
+        if(heuristic_solution < cplex.getObjValue())
+          save_solution(heuristic_file, g, cplex, theta, pi, columns);          
+        else
+          cout << "Improve Heuristic failed" << endl;
+        cout << cplex.getStatus() << endl;
+      } else
           solution_print(cplex, env, g);  
-        }
     } else
       relax_print(cplex, env);
   }
