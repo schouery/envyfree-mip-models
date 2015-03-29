@@ -22,7 +22,6 @@ void stm_create_vars(graph g, IloModel model, IloNumVarArray theta, IloNumVarArr
       s = "theta_" + itos(i) + "," + itos(j);
       theta.add(IloNumVar(env, 0.0, 1.0, ILOBOOL, s.c_str()));
 			 s = "p_" + itos(i) + "," + itos(j);
-			 // p.add(IloNumVar(env, 0.0, IloInfinity, ILOFLOAT, s.c_str()));
       p.add(IloNumVar(env, 0.0, g->adj[i][j], ILOFLOAT, s.c_str()));
       k++;
     }
@@ -306,11 +305,11 @@ void stm_family_solve(graph g, vector<int>& allocation, vector<double>& pricing,
       failed_print(g);
     } else if(integer) {        
       if(improve_heuristic) {
-	if(cplex.getObjValue() > heuristic_solution)
-	  save_solution(heuristic_file, g, cplex, theta, pi, columns);
+        if(cplex.getObjValue() > heuristic_solution)
+          save_solution(heuristic_file, g, cplex, theta, pi, columns);
         if(cplex.getObjValue() - heuristic_solution < 0.1)
           cout << "Improve Heuristic failed" << endl;
-	printf("%lf %lf\n", cplex.getObjValue(), heuristic_solution);
+        printf("%lf %lf\n", cplex.getObjValue(), heuristic_solution);
         cout << cplex.getStatus() << endl;
       } else
           solution_print(cplex, env, g);  

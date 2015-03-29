@@ -143,31 +143,27 @@ int main(int argc, char **argv) {
   switch(option) {
     case UTILITY_FORMULATION:
       utility_solve(g, allocation, pricing);
-      // utility_solve(g, allocation, pricing, false);
-      // utility_solve(g, allocation, pricing, false, false);
+      utility_solve(g, allocation, pricing, false);
       break;
     case PROFIT_FORMULATION:
       profit_solve(g, allocation, pricing);
-      // profit_solve(g, allocation, pricing, false);
-      // profit_solve(g, allocation, pricing, false, false);
+      profit_solve(g, allocation, pricing, false);
       break;
     case STM_FORMULATION:
       stm_solve(g, allocation, pricing);
-      // stm_solve(g, allocation, pricing, false);
-      // stm_solve(g, allocation, pricing, false, false);
+      stm_solve(g, allocation, pricing, false);
       break;
     case HLMS_FORMULATION:
       hlms_solve(g, allocation, pricing);
-      // stm_solve(g, allocation, pricing, false, true, true);
-      // stm_solve(g, allocation, pricing, false, false, true);
+      hlms_solve(g, allocation, pricing, false);
       break;
     case LOOSE_FORMULATION:
       loose_solve(g, allocation, pricing);
-      // stm_solve(g, allocation, pricing, false, true, true, false);
-      // stm_solve(g, allocation, pricing, false, false, true, false);
+      loose_solve(g, allocation, pricing, false);
       break;
     case MST_FORMULATION:
       mst_solve(g, allocation, pricing);
+      mst_solve(g, allocation, pricing, false);
       break;
     case IMPROVE_HEURISTIC:
       hlms_solve(g, allocation, pricing, true, true, heuristic_file);
