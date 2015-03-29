@@ -2,6 +2,7 @@
 #include <ilcplex/ilocplex.h>
 #include <vector>
 #include <fstream>
+#include <cstdio>
 ILOSTLBEGIN
 
 using namespace std;
@@ -251,7 +252,7 @@ void save_solution(string heuristic_file, graph g, IloCplex cplex, IloNumVarArra
     bool found = false;
     for(int e = 0; e < g->dbidder[i]; e++) {
       int j = g->b_adj[i][e];
-      if(cplex.getValue(theta[columns[i][j]]) > 0) {
+      if(cplex.getValue(theta[columns[i][j]]) > 0.5) {
         file << i << " " << j << " " << cplex.getValue(pi[j]) << endl;
         found = true;
       }
@@ -305,10 +306,11 @@ void stm_family_solve(graph g, vector<int>& allocation, vector<double>& pricing,
       failed_print(g);
     } else if(integer) {        
       if(improve_heuristic) {
-        if(heuristic_solution < cplex.getObjValue())
-          save_solution(heuristic_file, g, cplex, theta, pi, columns);          
-        else
+	if(cplex.getObjValue() > heuristic_solution)
+	  save_solution(heuristic_file, g, cplex, theta, pi, columns);
+        if(cplex.getObjValue() - heuristic_solution < 0.1)
           cout << "Improve Heuristic failed" << endl;
+	printf("%lf %lf\n", cplex.getObjValue(), heuristic_solution);
         cout << cplex.getStatus() << endl;
       } else
           solution_print(cplex, env, g);  

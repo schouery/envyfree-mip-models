@@ -1,3 +1,4 @@
+MAKEFLAGS+=" -j 16"
 LIBFORMAT     = static_pic
 CPLEXDIR      = /opt/cplex/cplex125/cplex
 CONCERTDIR    = /opt/cplex/cplex125/concert
@@ -9,9 +10,9 @@ ifeq ($(shell uname), Darwin)
 else
 	SYSTEM     = x86-64_sles10_4.1
 	CCC = g++
-	# CCOPT = -m64 -O3 -fPIC -fexceptions -DNDEBUG -DIL_STD -DTHREADS=16 -DWORKMEM=65536
+	CCOPT = -m64 -O3 -fPIC -fexceptions -DNDEBUG -DIL_STD -DTHREADS=16  -DWORKMEM=65536
 	# CCOPT = -m64 -O3 -fPIC -fexceptions -DNDEBUG -DIL_STD -DTHREADS=2 -DWORKMEM=32768
-	CCOPT = -m64 -O3 -fPIC -fexceptions -DNDEBUG -DIL_STD -DTHREADS=1 -DWORKMEM=4096
+	# CCOPT = -m64 -O3 -fPIC -fexceptions -DNDEBUG -DIL_STD -DTHREADS=1 -DWORKMEM=4096
 	CCLNFLAGS = -lilocplex -lcplex -lconcert -lm -m64 -pthread
 endif
 CPLEXLIBDIR   = $(CPLEXDIR)/lib/$(SYSTEM)/$(LIBFORMAT)
