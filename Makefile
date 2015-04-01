@@ -1,18 +1,18 @@
-MAKEFLAGS+=" -j 16"
 LIBFORMAT     = static_pic
 CPLEXDIR      = /opt/cplex/cplex125/cplex
 CONCERTDIR    = /opt/cplex/cplex125/concert
 ifeq ($(shell uname), Darwin)
+	MAKEFLAGS+=" -j 2"
 	SYSTEM        = x86-64_osx
 	CCC = clang++ -O0
 	CCOPT = -m64 -O -fPIC -fexceptions -DNDEBUG -DIL_STD -stdlib=libstdc++
 	CCLNFLAGS = -lconcert -lilocplex -lcplex -m64 -lm -lpthread -framework CoreFoundation -framework IOKit
 else
+	MAKEFLAGS+=" -j 16"
 	SYSTEM     = x86-64_sles10_4.1
 	CCC = g++
-	CCOPT = -m64 -O3 -fPIC -fexceptions -DNDEBUG -DIL_STD -DTHREADS=16  -DWORKMEM=65536
-	# CCOPT = -m64 -O3 -fPIC -fexceptions -DNDEBUG -DIL_STD -DTHREADS=2 -DWORKMEM=32768
-	# CCOPT = -m64 -O3 -fPIC -fexceptions -DNDEBUG -DIL_STD -DTHREADS=1 -DWORKMEM=4096
+	# CCOPT = -m64 -O3 -fPIC -fexceptions -DNDEBUG -DIL_STD -DTHREADS=16  -DWORKMEM=32768
+	CCOPT = -m64 -O3 -fPIC -fexceptions -DNDEBUG -DIL_STD -DTHREADS=1 -DWORKMEM=4096
 	CCLNFLAGS = -lilocplex -lcplex -lconcert -lm -m64 -pthread
 endif
 CPLEXLIBDIR   = $(CPLEXDIR)/lib/$(SYSTEM)/$(LIBFORMAT)
@@ -22,8 +22,6 @@ CONCERTINCDIR = $(CONCERTDIR)/include
 CPLEXINCDIR   = $(CPLEXDIR)/include
 CCFLAGS = $(CCOPT) -I$(CPLEXINCDIR) -I$(CONCERTINCDIR) 
 
-
-# Mantenha uma linha em branco no comeco desse arquivo
 all: envyfree	 pricedown-modified
 
 envyfree: envyfree.o graph.o utils.o utility.o stm.o profit.o

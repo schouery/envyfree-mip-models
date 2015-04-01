@@ -7,7 +7,7 @@
 #define THREADS 1
 #endif
 #ifndef WORKMEM
-#define WORKMEM 1024 // 4 GB
+#define WORKMEM 1024
 #endif
 
 #define DEFAULT_FORMULATION 3

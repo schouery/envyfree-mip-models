@@ -43,6 +43,7 @@ void config_cplex(IloCplex cplex, bool log) {
   } 
   cplex.setParam(IloCplex::WorkMem, WORKMEM);
   cplex.setParam(IloCplex::Threads, THREADS);
+  cplex.setParam(IloCplex::NodeFileInd, 2);//saves on disk
   if(util_timelimit > 0)
     cplex.setParam(IloCplex::TiLim, util_timelimit);
   if(util_nodelimit)
