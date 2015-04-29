@@ -55,6 +55,7 @@ void define_log(int argc, char **argv);
 
 void save_log();
 
+void setBoundLog(char *filename);
 
 
 #endif /* UTILS_H_ */

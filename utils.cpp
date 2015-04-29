@@ -2,10 +2,31 @@
 #include <iostream>
 #include <sstream>
 #include <string>
+#include <fstream>
 #include <sys/time.h>
 #include <sys/resource.h>
 
 using namespace std;
+
+ofstream bound_log_file;
+bool bound_log = false;
+void setBoundLog(char *filename) {
+  bound_log_file.open(filename);
+  bound_log = true;
+}
+
+int last_bound_info = 0;
+ILOMIPINFOCALLBACK0(InfoCallback) {
+  if(clock_current_time() - last_bound_info > 1) {
+    bound_log_file << clock_current_time();
+    bound_log_file << " " << getBestObjValue();
+    bound_log_file << " " << getIncumbentObjValue();
+    bound_log_file << " " << getNnodes();
+    bound_log_file << endl;
+    last_bound_info = clock_current_time();
+  }
+}
+
 
 int util_timelimit = 0;
 int util_nodelimit = 0;
@@ -48,6 +69,8 @@ void config_cplex(IloCplex cplex, bool log) {
     cplex.setParam(IloCplex::TiLim, util_timelimit);
   if(util_nodelimit)
     cplex.setParam(IloCplex::NodeLim, util_nodelimit);
+  if(bound_log)
+    cplex.use(InfoCallback(cplex.getEnv()));
 }
 
 void setTimeLimit(int timelimit) {
@@ -148,6 +171,8 @@ void solution_print(IloCplex cplex, IloEnv env, graph g) {
   cout << "  nodes: " << cplex.getNnodes() << endl;
   cout << "  nodes_left: " << cplex.getNnodesLeft() << endl;
   cout << "  rows: " << cplex.getNrows() << endl;
+  if(bound_log)
+    bound_log_file.close();
 }
 
 void relax_print(IloCplex cplex, IloEnv env) {
@@ -167,3 +192,5 @@ void define_log(int argc, char **argv) {
 void save_log() {
   output.close();
 }
+
+

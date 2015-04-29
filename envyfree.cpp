@@ -38,7 +38,7 @@ graph read(char *filename) {
 }
 
 void usage(char *argv) {
-  cout << argv << " [-U|-S|-H|-P|-L|-M|-I] [-t time] [-n nodes] [-v level] [-h] [-e epsilon] filename" << endl;
+  cout << argv << " [-U|-S|-H|-P|-L|-M|-I] [-t time] [-n nodes] [-v level] [-h] [-l log_file] filename" << endl;
   cout << "-U: " << "Utility Formulation" << endl;
   cout << "-S: " << "STM Formulation" << endl;
   cout << "-H: " << "HLMS Formulation" << endl;
@@ -46,6 +46,7 @@ void usage(char *argv) {
   cout << "-P: " << "Profit Formulation" << endl;
   cout << "-M: " << "MST Formulation" << endl;
   cout << "-I: " << "Improves current heuristic" << endl;
+  cout << "-l log_file: " << "Logs lower/upper bound and nodes processed every second" << endl;
   cout << "-t time: " << "Set time as a time limit" << endl;
   cout << "-n nodes: " << "Set nodes as a node limit" << endl;
   cout << "-v level: " << "Set the verbosity level" << endl;
@@ -57,7 +58,7 @@ void usage(char *argv) {
 int setup(int argc, char **argv) {
   int c, formulation = DEFAULT_FORMULATION; 
   opterr = 0; 
-  while ((c = getopt (argc, argv, "USHPLMIt:n:v:h")) != -1) {
+  while ((c = getopt (argc, argv, "USHPLMIt:n:v:l:h")) != -1) {
     switch (c) {
       case 'U':
         formulation = UTILITY_FORMULATION;
@@ -80,6 +81,9 @@ int setup(int argc, char **argv) {
       case 'I':
         formulation = IMPROVE_HEURISTIC;
         break;
+      case 'l':
+        setBoundLog(optarg);
+        break;
       case 't':
         setTimeLimit(atoi(optarg));
         break;
@@ -92,7 +96,7 @@ int setup(int argc, char **argv) {
       case 'h':
         return -1;
       case '?':
-        if (optopt == 't' || optopt == 'v')
+        if (optopt == 't' || optopt == 'v' || optopt == 'l')
           fprintf (stderr, "Option -%c requires an argument.\n", optopt);
         else if (isprint (optopt))
           fprintf (stderr, "Unknown option `-%c'.\n", optopt);
@@ -129,6 +133,10 @@ void read_heuristic(string heuristic_file, graph g, vector<int>& allocation, vec
 
 int main(int argc, char **argv) {
   int option = setup(argc, argv);
+  if(option == -1){
+    usage(argv[0]);
+    return 0;
+  }
   define_log(argc, argv);
   graph g;
   vector<int> allocation;
