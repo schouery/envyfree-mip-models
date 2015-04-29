@@ -15,6 +15,7 @@ void setBoundLog(char *filename) {
   bound_log = true;
 }
 
+
 int last_bound_info = 0;
 ILOMIPINFOCALLBACK0(InfoCallback) {
   if(clock_current_time() - last_bound_info > 1) {
@@ -27,6 +28,13 @@ ILOMIPINFOCALLBACK0(InfoCallback) {
   }
 }
 
+void last_log_entry(IloCplex cplex) {
+    bound_log_file << clock_current_time();
+    bound_log_file << " " << cplex.getBestObjValue();
+    bound_log_file << " " << cplex.getObjValue();
+    bound_log_file << " " << cplex.getNnodes();
+    bound_log_file << endl;
+}
 
 int util_timelimit = 0;
 int util_nodelimit = 0;
@@ -172,6 +180,7 @@ void solution_print(IloCplex cplex, IloEnv env, graph g) {
   cout << "  nodes_left: " << cplex.getNnodesLeft() << endl;
   cout << "  rows: " << cplex.getNrows() << endl;
   if(bound_log)
+    last_log_entry(cplex);
     bound_log_file.close();
 }
 
