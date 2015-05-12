@@ -1,6 +1,6 @@
 -
   params: "-U"
-  filename: mixed/stm/stm-b=150-i=250.3
+  filename: mixed/rc/rc-b=150-i=250.3
   bidders: 150
   items: 250
   edges: 37500
@@ -19,7 +19,7 @@
   relax_value: 153220
 -
   params: "-U"
-  filename: mixed/stm/stm-b=250-i=150.5
+  filename: mixed/rc/rc-b=250-i=150.5
   bidders: 250
   items: 150
   edges: 37500
@@ -38,7 +38,7 @@
   relax_value: 255063
 -
   params: "-P"
-  filename: mixed/stm/stm-b=150-i=250.3
+  filename: mixed/rc/rc-b=150-i=250.3
   bidders: 150
   items: 250
   edges: 37500
@@ -57,7 +57,7 @@
   relax_value: 153220
 -
   params: "-P"
-  filename: mixed/stm/stm-b=250-i=150.5
+  filename: mixed/rc/rc-b=250-i=150.5
   bidders: 250
   items: 150
   edges: 37500
@@ -76,7 +76,7 @@
   relax_value: 255063
 -
   params: "-H"
-  filename: mixed/stm/stm-b=150-i=250.3
+  filename: mixed/rc/rc-b=150-i=250.3
   bidders: 150
   items: 250
   edges: 37500
@@ -95,7 +95,7 @@
   relax_value: 153129
 -
   params: "-U"
-  filename: mixed/stm/stm-b=250-i=150.2
+  filename: mixed/rc/rc-b=250-i=150.2
   bidders: 250
   items: 150
   edges: 37500
@@ -114,7 +114,7 @@
   relax_value: 255027
 -
   params: "-H"
-  filename: mixed/stm/stm-b=250-i=150.5
+  filename: mixed/rc/rc-b=250-i=150.5
   bidders: 250
   items: 150
   edges: 37500
@@ -133,7 +133,7 @@
   relax_value: 254680
 -
   params: "-P"
-  filename: mixed/stm/stm-b=250-i=150.2
+  filename: mixed/rc/rc-b=250-i=150.2
   bidders: 250
   items: 150
   edges: 37500
@@ -152,7 +152,7 @@
   relax_value: 255027
 -
   params: "-H"
-  filename: mixed/stm/stm-b=250-i=150.2
+  filename: mixed/rc/rc-b=250-i=150.2
   bidders: 250
   items: 150
   edges: 37500
@@ -171,7 +171,7 @@
   relax_value: 254619
 -
   params: "-U"
-  filename: mixed/stm/stm-b=150-i=250.8
+  filename: mixed/rc/rc-b=150-i=250.8
   bidders: 150
   items: 250
   edges: 37500
@@ -190,7 +190,7 @@
   relax_value: 153268
 -
   params: "-P"
-  filename: mixed/stm/stm-b=150-i=250.8
+  filename: mixed/rc/rc-b=150-i=250.8
   bidders: 150
   items: 250
   edges: 37500
@@ -209,7 +209,7 @@
   relax_value: 153268
 -
   params: "-U"
-  filename: mixed/stm/stm-b=250-i=150.6
+  filename: mixed/rc/rc-b=250-i=150.6
   bidders: 250
   items: 150
   edges: 37500
@@ -228,7 +228,7 @@
   relax_value: 255006
 -
   params: "-P"
-  filename: mixed/stm/stm-b=250-i=150.6
+  filename: mixed/rc/rc-b=250-i=150.6
   bidders: 250
   items: 150
   edges: 37500
@@ -247,7 +247,7 @@
   relax_value: 255006
 -
   params: "-H"
-  filename: mixed/stm/stm-b=250-i=150.6
+  filename: mixed/rc/rc-b=250-i=150.6
   bidders: 250
   items: 150
   edges: 37500
@@ -266,7 +266,7 @@
   relax_value: 254578
 -
   params: "-U"
-  filename: mixed/stm/stm-b=150-i=250.2
+  filename: mixed/rc/rc-b=150-i=250.2
   bidders: 150
   items: 250
   edges: 37500
@@ -285,7 +285,7 @@
   relax_value: 153260
 -
   params: "-P"
-  filename: mixed/stm/stm-b=150-i=250.2
+  filename: mixed/rc/rc-b=150-i=250.2
   bidders: 150
   items: 250
   edges: 37500
@@ -304,7 +304,7 @@
   relax_value: 153260
 -
   params: "-U"
-  filename: mixed/stm/stm-b=250-i=150.0
+  filename: mixed/rc/rc-b=250-i=150.0
   bidders: 250
   items: 150
   edges: 37500
@@ -323,7 +323,7 @@
   relax_value: 255057
 -
   params: "-P"
-  filename: mixed/stm/stm-b=150-i=250.1
+  filename: mixed/rc/rc-b=150-i=250.1
   bidders: 150
   items: 250
   edges: 37500
@@ -342,7 +342,7 @@
   relax_value: 153247
 -
   params: "-U"
-  filename: mixed/stm/stm-b=150-i=250.1
+  filename: mixed/rc/rc-b=150-i=250.1
   bidders: 150
   items: 250
   edges: 37500
@@ -361,7 +361,7 @@
   relax_value: 153247
 -
   params: "-H"
-  filename: mixed/stm/stm-b=150-i=250.8
+  filename: mixed/rc/rc-b=150-i=250.8
   bidders: 150
   items: 250
   edges: 37500
@@ -380,7 +380,7 @@
   relax_value: 153183
 -
   params: "-U"
-  filename: mixed/stm/stm-b=150-i=250.6
+  filename: mixed/rc/rc-b=150-i=250.6
   bidders: 150
   items: 250
   edges: 37500
@@ -399,7 +399,7 @@
   relax_value: 153218
 -
   params: "-H"
-  filename: mixed/stm/stm-b=150-i=250.2
+  filename: mixed/rc/rc-b=150-i=250.2
   bidders: 150
   items: 250
   edges: 37500
@@ -418,7 +418,7 @@
   relax_value: 153179
 -
   params: "-P"
-  filename: mixed/stm/stm-b=150-i=250.6
+  filename: mixed/rc/rc-b=150-i=250.6
   bidders: 150
   items: 250
   edges: 37500
@@ -437,7 +437,7 @@
   relax_value: 153218
 -
   params: "-H"
-  filename: mixed/stm/stm-b=150-i=250.6
+  filename: mixed/rc/rc-b=150-i=250.6
   bidders: 150
   items: 250
   edges: 37500
@@ -456,7 +456,7 @@
   relax_value: 153148
 -
   params: "-H"
-  filename: mixed/stm/stm-b=150-i=250.1
+  filename: mixed/rc/rc-b=150-i=250.1
   bidders: 150
   items: 250
   edges: 37500
@@ -475,7 +475,7 @@
   relax_value: 153168
 -
   params: "-P"
-  filename: mixed/stm/stm-b=250-i=150.0
+  filename: mixed/rc/rc-b=250-i=150.0
   bidders: 250
   items: 150
   edges: 37500
@@ -494,7 +494,7 @@
   relax_value: 255057
 -
   params: "-H"
-  filename: mixed/stm/stm-b=250-i=150.0
+  filename: mixed/rc/rc-b=250-i=150.0
   bidders: 250
   items: 150
   edges: 37500
@@ -513,7 +513,7 @@
   relax_value: 254630
 -
   params: "-U"
-  filename: mixed/stm/stm-b=150-i=250.4
+  filename: mixed/rc/rc-b=150-i=250.4
   bidders: 150
   items: 250
   edges: 37500
@@ -532,7 +532,7 @@
   relax_value: 153215
 -
   params: "-P"
-  filename: mixed/stm/stm-b=150-i=250.4
+  filename: mixed/rc/rc-b=150-i=250.4
   bidders: 150
   items: 250
   edges: 37500
@@ -551,7 +551,7 @@
   relax_value: 153215
 -
   params: "-U"
-  filename: mixed/stm/stm-b=150-i=250.7
+  filename: mixed/rc/rc-b=150-i=250.7
   bidders: 150
   items: 250
   edges: 37500
@@ -570,7 +570,7 @@
   relax_value: 153237
 -
   params: "-H"
-  filename: mixed/stm/stm-b=150-i=250.4
+  filename: mixed/rc/rc-b=150-i=250.4
   bidders: 150
   items: 250
   edges: 37500
@@ -589,7 +589,7 @@
   relax_value: 153140
 -
   params: "-P"
-  filename: mixed/stm/stm-b=150-i=250.7
+  filename: mixed/rc/rc-b=150-i=250.7
   bidders: 150
   items: 250
   edges: 37500
@@ -608,7 +608,7 @@
   relax_value: 153237
 -
   params: "-U"
-  filename: mixed/stm/stm-b=250-i=150.1
+  filename: mixed/rc/rc-b=250-i=150.1
   bidders: 250
   items: 150
   edges: 37500
@@ -627,7 +627,7 @@
   relax_value: 255084
 -
   params: "-P"
-  filename: mixed/stm/stm-b=250-i=150.1
+  filename: mixed/rc/rc-b=250-i=150.1
   bidders: 250
   items: 150
   edges: 37500
@@ -646,7 +646,7 @@
   relax_value: 255084
 -
   params: "-U"
-  filename: mixed/stm/stm-b=250-i=150.8
+  filename: mixed/rc/rc-b=250-i=150.8
   bidders: 250
   items: 150
   edges: 37500
@@ -665,7 +665,7 @@
   relax_value: 254950
 -
   params: "-H"
-  filename: mixed/stm/stm-b=250-i=150.1
+  filename: mixed/rc/rc-b=250-i=150.1
   bidders: 250
   items: 150
   edges: 37500
@@ -684,7 +684,7 @@
   relax_value: 254699
 -
   params: "-H"
-  filename: mixed/stm/stm-b=150-i=250.7
+  filename: mixed/rc/rc-b=150-i=250.7
   bidders: 150
   items: 250
   edges: 37500
@@ -703,7 +703,7 @@
   relax_value: 153164
 -
   params: "-P"
-  filename: mixed/stm/stm-b=250-i=150.8
+  filename: mixed/rc/rc-b=250-i=150.8
   bidders: 250
   items: 150
   edges: 37500
@@ -722,7 +722,7 @@
   relax_value: 254950
 -
   params: "-H"
-  filename: mixed/stm/stm-b=250-i=150.8
+  filename: mixed/rc/rc-b=250-i=150.8
   bidders: 250
   items: 150
   edges: 37500
@@ -741,7 +741,7 @@
   relax_value: 254507
 -
   params: "-U"
-  filename: mixed/stm/stm-b=150-i=250.5
+  filename: mixed/rc/rc-b=150-i=250.5
   bidders: 150
   items: 250
   edges: 37500
@@ -760,7 +760,7 @@
   relax_value: 153251
 -
   params: "-P"
-  filename: mixed/stm/stm-b=150-i=250.5
+  filename: mixed/rc/rc-b=150-i=250.5
   bidders: 150
   items: 250
   edges: 37500
@@ -779,7 +779,7 @@
   relax_value: 153251
 -
   params: "-H"
-  filename: mixed/stm/stm-b=150-i=250.5
+  filename: mixed/rc/rc-b=150-i=250.5
   bidders: 150
   items: 250
   edges: 37500
@@ -798,7 +798,7 @@
   relax_value: 153162
 -
   params: "-U"
-  filename: mixed/stm/stm-b=250-i=150.7
+  filename: mixed/rc/rc-b=250-i=150.7
   bidders: 250
   items: 150
   edges: 37500
@@ -817,7 +817,7 @@
   relax_value: 254952
 -
   params: "-P"
-  filename: mixed/stm/stm-b=250-i=150.7
+  filename: mixed/rc/rc-b=250-i=150.7
   bidders: 250
   items: 150
   edges: 37500
@@ -836,7 +836,7 @@
   relax_value: 254952
 -
   params: "-H"
-  filename: mixed/stm/stm-b=250-i=150.7
+  filename: mixed/rc/rc-b=250-i=150.7
   bidders: 250
   items: 150
   edges: 37500
@@ -855,7 +855,7 @@
   relax_value: 254518
 -
   params: "-U"
-  filename: mixed/stm/stm-b=250-i=150.9
+  filename: mixed/rc/rc-b=250-i=150.9
   bidders: 250
   items: 150
   edges: 37500
@@ -874,7 +874,7 @@
   relax_value: 254960
 -
   params: "-P"
-  filename: mixed/stm/stm-b=250-i=150.9
+  filename: mixed/rc/rc-b=250-i=150.9
   bidders: 250
   items: 150
   edges: 37500
@@ -893,7 +893,7 @@
   relax_value: 254960
 -
   params: "-U"
-  filename: mixed/stm/stm-b=150-i=250.0
+  filename: mixed/rc/rc-b=150-i=250.0
   bidders: 150
   items: 250
   edges: 37500
@@ -912,7 +912,7 @@
   relax_value: 153214
 -
   params: "-H"
-  filename: mixed/stm/stm-b=250-i=150.9
+  filename: mixed/rc/rc-b=250-i=150.9
   bidders: 250
   items: 150
   edges: 37500
@@ -931,7 +931,7 @@
   relax_value: 254568
 -
   params: "-P"
-  filename: mixed/stm/stm-b=150-i=250.0
+  filename: mixed/rc/rc-b=150-i=250.0
   bidders: 150
   items: 250
   edges: 37500
@@ -950,7 +950,7 @@
   relax_value: 153214
 -
   params: "-U"
-  filename: mixed/stm/stm-b=150-i=250.9
+  filename: mixed/rc/rc-b=150-i=250.9
   bidders: 150
   items: 250
   edges: 37500
@@ -969,7 +969,7 @@
   relax_value: 153185
 -
   params: "-P"
-  filename: mixed/stm/stm-b=150-i=250.9
+  filename: mixed/rc/rc-b=150-i=250.9
   bidders: 150
   items: 250
   edges: 37500
@@ -988,7 +988,7 @@
   relax_value: 153185
 -
   params: "-H"
-  filename: mixed/stm/stm-b=150-i=250.0
+  filename: mixed/rc/rc-b=150-i=250.0
   bidders: 150
   items: 250
   edges: 37500
@@ -1007,7 +1007,7 @@
   relax_value: 153114
 -
   params: "-U"
-  filename: mixed/stm/stm-b=250-i=150.4
+  filename: mixed/rc/rc-b=250-i=150.4
   bidders: 250
   items: 150
   edges: 37500
@@ -1026,7 +1026,7 @@
   relax_value: 255071
 -
   params: "-H"
-  filename: mixed/stm/stm-b=150-i=250.9
+  filename: mixed/rc/rc-b=150-i=250.9
   bidders: 150
   items: 250
   edges: 37500
@@ -1045,7 +1045,7 @@
   relax_value: 153078
 -
   params: "-P"
-  filename: mixed/stm/stm-b=250-i=150.4
+  filename: mixed/rc/rc-b=250-i=150.4
   bidders: 250
   items: 150
   edges: 37500
@@ -1064,7 +1064,7 @@
   relax_value: 255071
 -
   params: "-H"
-  filename: mixed/stm/stm-b=250-i=150.4
+  filename: mixed/rc/rc-b=250-i=150.4
   bidders: 250
   items: 150
   edges: 37500
@@ -1083,7 +1083,7 @@
   relax_value: 254667
 -
   params: "-U"
-  filename: mixed/stm/stm-b=250-i=150.3
+  filename: mixed/rc/rc-b=250-i=150.3
   bidders: 250
   items: 150
   edges: 37500
@@ -1102,7 +1102,7 @@
   relax_value: 255079
 -
   params: "-P"
-  filename: mixed/stm/stm-b=250-i=150.3
+  filename: mixed/rc/rc-b=250-i=150.3
   bidders: 250
   items: 150
   edges: 37500
@@ -1121,7 +1121,7 @@
   relax_value: 255079
 -
   params: "-H"
-  filename: mixed/stm/stm-b=250-i=150.3
+  filename: mixed/rc/rc-b=250-i=150.3
   bidders: 250
   items: 150
   edges: 37500
@@ -1140,7 +1140,7 @@
   relax_value: 254720
 -
   params: "-P"
-  filename: mixed/stm/stm-b=100-i=300.2
+  filename: mixed/rc/rc-b=100-i=300.2
   bidders: 100
   items: 300
   edges: 30000
@@ -1159,7 +1159,7 @@
   relax_value: 102184
 -
   params: "-U"
-  filename: mixed/stm/stm-b=100-i=300.2
+  filename: mixed/rc/rc-b=100-i=300.2
   bidders: 100
   items: 300
   edges: 30000
@@ -1178,7 +1178,7 @@
   relax_value: 102184
 -
   params: "-U"
-  filename: mixed/stm/stm-b=100-i=300.6
+  filename: mixed/rc/rc-b=100-i=300.6
   bidders: 100
   items: 300
   edges: 30000
@@ -1197,7 +1197,7 @@
   relax_value: 102139
 -
   params: "-P"
-  filename: mixed/stm/stm-b=100-i=300.6
+  filename: mixed/rc/rc-b=100-i=300.6
   bidders: 100
   items: 300
   edges: 30000
@@ -1216,7 +1216,7 @@
   relax_value: 102139
 -
   params: "-U"
-  filename: mixed/stm/stm-b=100-i=300.9
+  filename: mixed/rc/rc-b=100-i=300.9
   bidders: 100
   items: 300
   edges: 30000
@@ -1235,7 +1235,7 @@
   relax_value: 102159
 -
   params: "-P"
-  filename: mixed/stm/stm-b=100-i=300.9
+  filename: mixed/rc/rc-b=100-i=300.9
   bidders: 100
   items: 300
   edges: 30000
@@ -1254,7 +1254,7 @@
   relax_value: 102159
 -
   params: "-P"
-  filename: mixed/stm/stm-b=100-i=300.3
+  filename: mixed/rc/rc-b=100-i=300.3
   bidders: 100
   items: 300
   edges: 30000
@@ -1273,7 +1273,7 @@
   relax_value: 102187
 -
   params: "-U"
-  filename: mixed/stm/stm-b=100-i=300.3
+  filename: mixed/rc/rc-b=100-i=300.3
   bidders: 100
   items: 300
   edges: 30000
@@ -1292,7 +1292,7 @@
   relax_value: 102187
 -
   params: "-H"
-  filename: mixed/stm/stm-b=100-i=300.2
+  filename: mixed/rc/rc-b=100-i=300.2
   bidders: 100
   items: 300
   edges: 30000
@@ -1311,7 +1311,7 @@
   relax_value: 102154
 -
   params: "-H"
-  filename: mixed/stm/stm-b=100-i=300.6
+  filename: mixed/rc/rc-b=100-i=300.6
   bidders: 100
   items: 300
   edges: 30000
@@ -1330,7 +1330,7 @@
   relax_value: 102109
 -
   params: "-P"
-  filename: mixed/stm/stm-b=100-i=300.0
+  filename: mixed/rc/rc-b=100-i=300.0
   bidders: 100
   items: 300
   edges: 30000
@@ -1349,7 +1349,7 @@
   relax_value: 102186
 -
   params: "-U"
-  filename: mixed/stm/stm-b=100-i=300.0
+  filename: mixed/rc/rc-b=100-i=300.0
   bidders: 100
   items: 300
   edges: 30000
@@ -1368,7 +1368,7 @@
   relax_value: 102186
 -
   params: "-H"
-  filename: mixed/stm/stm-b=100-i=300.9
+  filename: mixed/rc/rc-b=100-i=300.9
   bidders: 100
   items: 300
   edges: 30000
@@ -1387,7 +1387,7 @@
   relax_value: 102138
 -
   params: "-P"
-  filename: mixed/stm/stm-b=100-i=300.4
+  filename: mixed/rc/rc-b=100-i=300.4
   bidders: 100
   items: 300
   edges: 30000
@@ -1406,7 +1406,7 @@
   relax_value: 102175
 -
   params: "-U"
-  filename: mixed/stm/stm-b=100-i=300.4
+  filename: mixed/rc/rc-b=100-i=300.4
   bidders: 100
   items: 300
   edges: 30000
@@ -1425,7 +1425,7 @@
   relax_value: 102175
 -
   params: "-H"
-  filename: mixed/stm/stm-b=100-i=300.3
+  filename: mixed/rc/rc-b=100-i=300.3
   bidders: 100
   items: 300
   edges: 30000
@@ -1444,7 +1444,7 @@
   relax_value: 102155
 -
   params: "-H"
-  filename: mixed/stm/stm-b=100-i=300.0
+  filename: mixed/rc/rc-b=100-i=300.0
   bidders: 100
   items: 300
   edges: 30000
@@ -1463,7 +1463,7 @@
   relax_value: 102166
 -
   params: "-U"
-  filename: mixed/stm/stm-b=100-i=300.7
+  filename: mixed/rc/rc-b=100-i=300.7
   bidders: 100
   items: 300
   edges: 30000
@@ -1482,7 +1482,7 @@
   relax_value: 102196
 -
   params: "-P"
-  filename: mixed/stm/stm-b=100-i=300.7
+  filename: mixed/rc/rc-b=100-i=300.7
   bidders: 100
   items: 300
   edges: 30000
@@ -1501,7 +1501,7 @@
   relax_value: 102196
 -
   params: "-H"
-  filename: mixed/stm/stm-b=100-i=300.4
+  filename: mixed/rc/rc-b=100-i=300.4
   bidders: 100
   items: 300
   edges: 30000
@@ -1520,7 +1520,7 @@
   relax_value: 102154
 -
   params: "-H"
-  filename: mixed/stm/stm-b=100-i=300.7
+  filename: mixed/rc/rc-b=100-i=300.7
   bidders: 100
   items: 300
   edges: 30000
@@ -1539,7 +1539,7 @@
   relax_value: 102173
 -
   params: "-U"
-  filename: mixed/stm/stm-b=300-i=100.9
+  filename: mixed/rc/rc-b=300-i=100.9
   bidders: 300
   items: 100
   edges: 30000
@@ -1558,7 +1558,7 @@
   relax_value: 305548
 -
   params: "-P"
-  filename: mixed/stm/stm-b=300-i=100.9
+  filename: mixed/rc/rc-b=300-i=100.9
   bidders: 300
   items: 100
   edges: 30000
@@ -1577,7 +1577,7 @@
   relax_value: 305548
 -
   params: "-H"
-  filename: mixed/stm/stm-b=300-i=100.9
+  filename: mixed/rc/rc-b=300-i=100.9
   bidders: 300
   items: 100
   edges: 30000
@@ -1596,7 +1596,7 @@
   relax_value: 304833
 -
   params: "-U"
-  filename: mixed/stm/stm-b=300-i=100.4
+  filename: mixed/rc/rc-b=300-i=100.4
   bidders: 300
   items: 100
   edges: 30000
@@ -1615,7 +1615,7 @@
   relax_value: 305526
 -
   params: "-P"
-  filename: mixed/stm/stm-b=300-i=100.4
+  filename: mixed/rc/rc-b=300-i=100.4
   bidders: 300
   items: 100
   edges: 30000
@@ -1634,7 +1634,7 @@
   relax_value: 305526
 -
   params: "-H"
-  filename: mixed/stm/stm-b=300-i=100.4
+  filename: mixed/rc/rc-b=300-i=100.4
   bidders: 300
   items: 100
   edges: 30000
@@ -1653,7 +1653,7 @@
   relax_value: 304683
 -
   params: "-U"
-  filename: mixed/stm/stm-b=300-i=100.2
+  filename: mixed/rc/rc-b=300-i=100.2
   bidders: 300
   items: 100
   edges: 30000
@@ -1672,7 +1672,7 @@
   relax_value: 305438
 -
   params: "-P"
-  filename: mixed/stm/stm-b=300-i=100.2
+  filename: mixed/rc/rc-b=300-i=100.2
   bidders: 300
   items: 100
   edges: 30000
@@ -1691,7 +1691,7 @@
   relax_value: 305438
 -
   params: "-U"
-  filename: mixed/stm/stm-b=100-i=300.5
+  filename: mixed/rc/rc-b=100-i=300.5
   bidders: 100
   items: 300
   edges: 30000
@@ -1710,7 +1710,7 @@
   relax_value: 102191
 -
   params: "-P"
-  filename: mixed/stm/stm-b=100-i=300.5
+  filename: mixed/rc/rc-b=100-i=300.5
   bidders: 100
   items: 300
   edges: 30000
@@ -1729,7 +1729,7 @@
   relax_value: 102191
 -
   params: "-H"
-  filename: mixed/stm/stm-b=100-i=300.5
+  filename: mixed/rc/rc-b=100-i=300.5
   bidders: 100
   items: 300
   edges: 30000
@@ -1748,7 +1748,7 @@
   relax_value: 102171
 -
   params: "-U"
-  filename: mixed/stm/stm-b=100-i=300.1
+  filename: mixed/rc/rc-b=100-i=300.1
   bidders: 100
   items: 300
   edges: 30000
@@ -1767,7 +1767,7 @@
   relax_value: 102175
 -
   params: "-P"
-  filename: mixed/stm/stm-b=100-i=300.1
+  filename: mixed/rc/rc-b=100-i=300.1
   bidders: 100
   items: 300
   edges: 30000
@@ -1786,7 +1786,7 @@
   relax_value: 102175
 -
   params: "-H"
-  filename: mixed/stm/stm-b=100-i=300.1
+  filename: mixed/rc/rc-b=100-i=300.1
   bidders: 100
   items: 300
   edges: 30000
@@ -1805,7 +1805,7 @@
   relax_value: 102153
 -
   params: "-H"
-  filename: mixed/stm/stm-b=300-i=100.2
+  filename: mixed/rc/rc-b=300-i=100.2
   bidders: 300
   items: 100
   edges: 30000
@@ -1824,7 +1824,7 @@
   relax_value: 304679
 -
   params: "-U"
-  filename: mixed/stm/stm-b=300-i=100.7
+  filename: mixed/rc/rc-b=300-i=100.7
   bidders: 300
   items: 100
   edges: 30000
@@ -1843,7 +1843,7 @@
   relax_value: 305581
 -
   params: "-P"
-  filename: mixed/stm/stm-b=300-i=100.7
+  filename: mixed/rc/rc-b=300-i=100.7
   bidders: 300
   items: 100
   edges: 30000
@@ -1862,7 +1862,7 @@
   relax_value: 305581
 -
   params: "-H"
-  filename: mixed/stm/stm-b=300-i=100.7
+  filename: mixed/rc/rc-b=300-i=100.7
   bidders: 300
   items: 100
   edges: 30000
@@ -1881,7 +1881,7 @@
   relax_value: 304796
 -
   params: "-U"
-  filename: mixed/stm/stm-b=300-i=100.8
+  filename: mixed/rc/rc-b=300-i=100.8
   bidders: 300
   items: 100
   edges: 30000
@@ -1900,7 +1900,7 @@
   relax_value: 305475
 -
   params: "-P"
-  filename: mixed/stm/stm-b=300-i=100.8
+  filename: mixed/rc/rc-b=300-i=100.8
   bidders: 300
   items: 100
   edges: 30000
@@ -1919,7 +1919,7 @@
   relax_value: 305475
 -
   params: "-H"
-  filename: mixed/stm/stm-b=300-i=100.8
+  filename: mixed/rc/rc-b=300-i=100.8
   bidders: 300
   items: 100
   edges: 30000
@@ -1938,7 +1938,7 @@
   relax_value: 304582
 -
   params: "-U"
-  filename: mixed/stm/stm-b=300-i=100.5
+  filename: mixed/rc/rc-b=300-i=100.5
   bidders: 300
   items: 100
   edges: 30000
@@ -1957,7 +1957,7 @@
   relax_value: 305502
 -
   params: "-P"
-  filename: mixed/stm/stm-b=300-i=100.5
+  filename: mixed/rc/rc-b=300-i=100.5
   bidders: 300
   items: 100
   edges: 30000
@@ -1976,7 +1976,7 @@
   relax_value: 305502
 -
   params: "-U"
-  filename: mixed/stm/stm-b=300-i=100.6
+  filename: mixed/rc/rc-b=300-i=100.6
   bidders: 300
   items: 100
   edges: 30000
@@ -1995,7 +1995,7 @@
   relax_value: 305673
 -
   params: "-H"
-  filename: mixed/stm/stm-b=300-i=100.5
+  filename: mixed/rc/rc-b=300-i=100.5
   bidders: 300
   items: 100
   edges: 30000
@@ -2014,7 +2014,7 @@
   relax_value: 304610
 -
   params: "-P"
-  filename: mixed/stm/stm-b=300-i=100.6
+  filename: mixed/rc/rc-b=300-i=100.6
   bidders: 300
   items: 100
   edges: 30000
@@ -2033,7 +2033,7 @@
   relax_value: 305673
 -
   params: "-H"
-  filename: mixed/stm/stm-b=300-i=100.6
+  filename: mixed/rc/rc-b=300-i=100.6
   bidders: 300
   items: 100
   edges: 30000
@@ -2052,7 +2052,7 @@
   relax_value: 304859
 -
   params: "-U"
-  filename: mixed/stm/stm-b=300-i=100.0
+  filename: mixed/rc/rc-b=300-i=100.0
   bidders: 300
   items: 100
   edges: 30000
@@ -2071,7 +2071,7 @@
   relax_value: 305560
 -
   params: "-U"
-  filename: mixed/stm/stm-b=100-i=300.8
+  filename: mixed/rc/rc-b=100-i=300.8
   bidders: 100
   items: 300
   edges: 30000
@@ -2090,7 +2090,7 @@
   relax_value: 102177
 -
   params: "-P"
-  filename: mixed/stm/stm-b=300-i=100.0
+  filename: mixed/rc/rc-b=300-i=100.0
   bidders: 300
   items: 100
   edges: 30000
@@ -2109,7 +2109,7 @@
   relax_value: 305560
 -
   params: "-P"
-  filename: mixed/stm/stm-b=100-i=300.8
+  filename: mixed/rc/rc-b=100-i=300.8
   bidders: 100
   items: 300
   edges: 30000
@@ -2128,7 +2128,7 @@
   relax_value: 102177
 -
   params: "-H"
-  filename: mixed/stm/stm-b=100-i=300.8
+  filename: mixed/rc/rc-b=100-i=300.8
   bidders: 100
   items: 300
   edges: 30000
@@ -2147,7 +2147,7 @@
   relax_value: 102153
 -
   params: "-H"
-  filename: mixed/stm/stm-b=300-i=100.0
+  filename: mixed/rc/rc-b=300-i=100.0
   bidders: 300
   items: 100
   edges: 30000
@@ -2166,7 +2166,7 @@
   relax_value: 304713
 -
   params: "-U"
-  filename: mixed/stm/stm-b=300-i=100.1
+  filename: mixed/rc/rc-b=300-i=100.1
   bidders: 300
   items: 100
   edges: 30000
@@ -2185,7 +2185,7 @@
   relax_value: 305615
 -
   params: "-P"
-  filename: mixed/stm/stm-b=300-i=100.1
+  filename: mixed/rc/rc-b=300-i=100.1
   bidders: 300
   items: 100
   edges: 30000
@@ -2204,7 +2204,7 @@
   relax_value: 305615
 -
   params: "-H"
-  filename: mixed/stm/stm-b=300-i=100.1
+  filename: mixed/rc/rc-b=300-i=100.1
   bidders: 300
   items: 100
   edges: 30000
@@ -2223,7 +2223,7 @@
   relax_value: 304779
 -
   params: "-U"
-  filename: mixed/stm/stm-b=300-i=100.3
+  filename: mixed/rc/rc-b=300-i=100.3
   bidders: 300
   items: 100
   edges: 30000
@@ -2242,7 +2242,7 @@
   relax_value: 305613
 -
   params: "-P"
-  filename: mixed/stm/stm-b=300-i=100.3
+  filename: mixed/rc/rc-b=300-i=100.3
   bidders: 300
   items: 100
   edges: 30000
@@ -2261,7 +2261,7 @@
   relax_value: 305613
 -
   params: "-H"
-  filename: mixed/stm/stm-b=300-i=100.3
+  filename: mixed/rc/rc-b=300-i=100.3
   bidders: 300
   items: 100
   edges: 30000
