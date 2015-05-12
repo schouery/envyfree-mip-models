@@ -1,0 +1,68 @@
+1 of 1 MIP starts provided solutions.
+MIP start 'm1' defined initial solution with objective 6761.8482.
+Tried aggregator 1 time.
+MIP Presolve eliminated 46 rows and 1 columns.
+Reduced MIP has 2554 rows, 1757 columns, and 15126 nonzeros.
+Reduced MIP has 800 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.01 sec. (5.13 ticks)
+Probing time = 0.01 sec. (3.30 ticks)
+Tried aggregator 1 time.
+Reduced MIP has 2554 rows, 1757 columns, and 15126 nonzeros.
+Reduced MIP has 800 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.01 sec. (6.30 ticks)
+Probing time = 0.01 sec. (3.29 ticks)
+Clique table members: 2972.
+MIP emphasis: balance optimality and feasibility.
+MIP search method: dynamic search.
+Parallel mode: none, using 1 thread.
+Root relaxation solution time = 0.04 sec. (24.48 ticks)
+
+        Nodes                                         Cuts/
+   Node  Left     Objective  IInf  Best Integer    Best Bound    ItCnt     Gap
+
+*     0+    0                         6761.8481    20858.9729     1522  208.48%
+      0     0     7406.8218   182     6761.8481     7406.8218     1522    9.54%
+      0     0     7119.2950   197     6761.8481     Cuts: 302     1785    5.29%
+      0     0     6981.3335   211     6761.8481     Cuts: 283     1989    3.25%
+      0     0     6946.8394   217     6761.8481     Cuts: 189     2165    2.74%
+      0     0     6908.2876   237     6761.8481     Cuts: 264     2296    2.17%
+      0     0     6877.9160   222     6761.8481     Cuts: 140     2460    1.72%
+      0     0     6860.3348   231     6761.8481     Cuts: 118     2604    1.46%
+      0     0     6838.7952   235     6761.8481      Cuts: 90     2728    1.14%
+      0     0     6836.6978   236     6761.8481     Cuts: 112     2801    1.11%
+      0     0     6835.5077   225     6761.8481      Cuts: 77     2875    1.09%
+      0     0     6833.3073   213     6761.8481      Cuts: 60     2915    1.06%
+      0     0     6826.2602   250     6761.8481      Cuts: 61     2975    0.95%
+      0     0     6824.3247   251     6761.8481      Cuts: 60     3011    0.92%
+      0     0     6821.8644   244     6761.8481      Cuts: 28     3063    0.89%
+      0     0     6820.2506   215     6761.8481      Cuts: 38     3137    0.86%
+      0     0     6818.8297   241     6761.8481      Cuts: 41     3190    0.84%
+      0     0     6818.1291   231     6761.8481      Cuts: 14     3216    0.83%
+      0     0     6815.9430   239     6761.8481      Cuts: 55     3244    0.80%
+      0     0     6813.7460   241     6761.8481      Cuts: 59     3273    0.77%
+      0     0     6811.7841   253     6761.8481      Cuts: 54     3316    0.74%
+      0     0     6810.5476   249     6761.8481      Cuts: 17     3342    0.72%
+      0     2     6810.5476   249     6761.8481     6810.2288     3342    0.72%
+Elapsed time = 1.51 sec. (834.19 ticks, tree = 0.00 MB, solutions = 1)
+     67    40     6778.1144    76     6761.8481     6780.9573     4786    0.28%
+    180   100     6762.3795    61     6761.8481     6777.6788     6461    0.23%
+    315   149     6774.0431    73     6761.8481     6774.3585     8567    0.19%
+    482   199     6770.3356    79     6761.8481     6772.0049    10845    0.15%
+    640   218     6763.0403    32     6761.8481     6769.4120    12849    0.11%
+    825   225        cutoff           6761.8481     6767.4384    14876    0.08%
+    981   224        cutoff           6761.8481     6766.4177    16561    0.07%
+   1151   171        cutoff           6761.8481     6764.6686    18308    0.04%
+   1324    60        cutoff           6761.8481     6762.8608    19402    0.01%
+
+Implied bound cuts applied:  49
+Flow cuts applied:  86
+Mixed integer rounding cuts applied:  239
+Lift and project cuts applied:  2
+Gomory fractional cuts applied:  19
+
+Root node processing (before b&c):
+  Real time             =    1.49 sec. (821.84 ticks)
+Sequential b&c:
+  Real time             =    3.19 sec. (2196.50 ticks)
+                          ------------
+Total (root+branch&cut) =    4.67 sec. (3018.34 ticks)
